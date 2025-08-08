@@ -14,27 +14,102 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
+            }
 
-                --bg-color: rgb(12, 19, 24);
-                --border-color: rgb(107, 61, 48);
-                --border-width: 15px;
-                --eye-color: rgba(12, 19, 24, 0.9);
-                --eye-border-color: rgba(107, 61, 48, 0.93);
+            #heixiu {
+                --color-black: #000;
+                --color-brown: #422b23;
+                --color-white: #ffffdf;
+                --color-blue: #449999;
+
+                --border-width: 12px;
+
+                --face-width: 400px;
+                --face-height: 320px;
+
+                --face-radius-top: 70% 75%;
+                --face-radius-bottom: 65% 60%;
+
+                --eye-width: calc(var(--face-width) * 1.2);
+                --eye-height: var(--face-height);
+                --eye-c1-width: calc(var(--face-width) * 0.26);
+                --eye-c1-height: calc(var(--eye-height) * 0.4);
+                --eye-c2-width: calc(var(--eye-c1-width) - var(--border-width));
+                --eye-c2-height: calc(var(--eye-c1-height) - var(--border-width));
+                --eye-c3-width: calc(
+                    var(--eye-c2-width) - var(--border-width) - var(--border-width) - var(--border-width)
+                );
+                --eye-c3-height: calc(
+                    var(--eye-c2-height) - var(--border-width) - var(--border-width) - var(--border-width)
+                );
+
+                --eye-left: calc(var(--face-width) * 0.1 * -1);
+                --eye-ch: calc(var(--face-width) * 0.34);
+                --eye-ct: 54%;
+
+                --ear-width: 240px;
+                --ear-height: 120px;
+                --ear-left: 80px;
+                --ear-top: -48px;
             }
 
             /* 脸 */
             #heixiu {
-                width: 400px;
-                height: 325px;
+                width: var(--face-width);
+                height: var(--face-height);
 
-                background: var(--bg-color);
-                border: var(--border-width) solid var(--border-color);
-                border-top-left-radius: 70% 80%;
-                border-top-right-radius: 70% 80%;
-                border-bottom-right-radius: 65% 60%;
-                border-bottom-left-radius: 65% 60%;
+                background: var(--color-black);
+                border: var(--border-width) solid var(--color-brown);
+                border-top-left-radius: var(--face-radius-top);
+                border-top-right-radius: var(--face-radius-top);
+                border-bottom-right-radius: var(--face-radius-bottom);
+                border-bottom-left-radius: var(--face-radius-bottom);
 
                 position: relative;
+            }
+
+            /* 五官 */
+            #heixiu::before {
+                content: '';
+                position: absolute;
+                display: block;
+                z-index: 1;
+                width: var(--eye-width);
+                height: var(--eye-height);
+                top: 0;
+                left: var(--eye-left);
+
+                background-repeat: no-repeat;
+                background-image: radial-gradient(
+                        var(--eye-c3-width) var(--eye-c3-height) ellipse at left var(--eye-ch) top var(--eye-ct),
+                        var(--color-black) 99.5%,
+                        transparent 100%
+                    ),
+                    radial-gradient(
+                        var(--eye-c2-width) var(--eye-c2-height) ellipse at left var(--eye-ch) top var(--eye-ct),
+                        var(--color-white) 99.5%,
+                        transparent 100%
+                    ),
+                    radial-gradient(
+                        var(--eye-c1-width) var(--eye-c1-height) ellipse at left var(--eye-ch) top var(--eye-ct),
+                        var(--color-brown) 99.5%,
+                        transparent 100%
+                    ),
+                    radial-gradient(
+                        var(--eye-c3-width) var(--eye-c3-height) ellipse at right var(--eye-ch) top var(--eye-ct),
+                        var(--color-black) 99.5%,
+                        transparent 100%
+                    ),
+                    radial-gradient(
+                        var(--eye-c2-width) var(--eye-c2-height) ellipse at right var(--eye-ch) top var(--eye-ct),
+                        var(--color-white) 99.5%,
+                        transparent 100%
+                    ),
+                    radial-gradient(
+                        var(--eye-c1-width) var(--eye-c1-height) ellipse at right var(--eye-ch) top var(--eye-ct),
+                        var(--color-brown) 99.5%,
+                        transparent 100%
+                    );
             }
 
             /* 耳朵 */
@@ -43,79 +118,14 @@
                 position: absolute;
                 display: block;
                 z-index: -1;
-                width: 100%;
-                height: 100%;
-                top: -30px;
-                left: 0;
+                width: var(--ear-width);
+                height: var(--ear-height);
+                top: var(--ear-top);
+                left: var(--ear-left);
 
-                background: var(--bg-color);
-                background-repeat: no-repeat;
-                background-image: linear-gradient(105deg, transparent 70%, var(--border-color) 70%),
-                    linear-gradient(135deg, transparent 50%, var(--bg-color) 50%),
-                    linear-gradient(75deg, var(--border-color) 30%, transparent 30%),
-                    linear-gradient(45deg, transparent 50%, var(--border-color) 50%);
+                background-color: var(--color-brown);
 
-                clip-path: polygon(12.5% 0%, 32.5% 100%, 67.5% 100%, 87.5% 0%, 50% 45%);
-
-                --mask-img: radial-gradient(10px 10px ellipse at left 84% top 8%, black 99.5%, transparent 100%),
-                    radial-gradient(10px 10px ellipse at left 16% top 8%, black 99.5%, transparent 100%),
-                    linear-gradient(to bottom, transparent 22px, black 22px);
-
-                mask-image: var(--mask-img);
-                -webkit-mask-image: var(--mask-img);
-            }
-
-            #heixiu::before {
-                content: '';
-                position: absolute;
-                display: block;
-                z-index: 10;
-                width: 120%;
-                height: 100%;
-                top: 0;
-                left: -10%;
-
-                background-repeat: no-repeat;
-                background-image:
-                /* 左眼 */ radial-gradient(
-                        45px 65px ellipse at left 28% top 52%,
-                        var(--eye-color) 99.5%,
-                        transparent 100%
-                    ),
-                    radial-gradient(
-                        60px 80px ellipse at left 28% top 52%,
-                        var(--eye-border-color) 99.5%,
-                        transparent 100%
-                    ),
-                    radial-gradient(95px 125px ellipse at left 28% top 52%, white 99.5%, transparent 100%),
-                    radial-gradient(
-                        110px 140px ellipse at left 28% top 52%,
-                        var(--border-color) 99.5%,
-                        transparent 100%
-                    ),
-                    /* 右眼 */
-                        radial-gradient(
-                            45px 65px ellipse at right 28% top 52%,
-                            var(--eye-color) 99.5%,
-                            transparent 100%
-                        ),
-                    radial-gradient(
-                        60px 80px ellipse at right 28% top 52%,
-                        var(--eye-border-color) 99.5%,
-                        transparent 100%
-                    ),
-                    radial-gradient(95px 125px ellipse at right 28% top 52%, white 99.5%, transparent 100%),
-                    radial-gradient(
-                        110px 140px ellipse at right 28% top 52%,
-                        var(--border-color) 99.5%,
-                        transparent 100%
-                    ),
-                    /* 嘴 */
-                        radial-gradient(
-                            10px 8px ellipse at left 50% top 90%,
-                            rgba(78, 162, 174, 0.1) 99.5%,
-                            transparent 100%
-                        );
+                clip-path: polygon(0% 100%, 22% 0%, 44% 100%, 56% 100%, 78% 0%, 100% 100%, 100% 100%, 0% 100%);
             }
         </style>
     </head>
