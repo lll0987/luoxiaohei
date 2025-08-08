@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>heixiu</title>
+
+        <style>
+            body {
+                width: 100%;
+                height: 100vh;
+                margin: 0;
+                padding: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                --bg-color: rgb(12, 19, 24);
+                --border-color: rgb(107, 61, 48);
+                --border-width: 15px;
+                --eye-color: rgba(12, 19, 24, 0.9);
+                --eye-border-color: rgba(107, 61, 48, 0.93);
+            }
+
+            /* 脸 */
+            #heixiu {
+                width: 400px;
+                height: 325px;
+
+                background: var(--bg-color);
+                border: var(--border-width) solid var(--border-color);
+                border-top-left-radius: 70% 80%;
+                border-top-right-radius: 70% 80%;
+                border-bottom-right-radius: 65% 60%;
+                border-bottom-left-radius: 65% 60%;
+
+                position: relative;
+            }
+
+            /* 耳朵 */
+            #heixiu::after {
+                content: '';
+                position: absolute;
+                display: block;
+                z-index: -1;
+                width: 100%;
+                height: 100%;
+                top: -30px;
+                left: 0;
+
+                background: var(--bg-color);
+                background-repeat: no-repeat;
+                background-image: linear-gradient(105deg, transparent 70%, var(--border-color) 70%),
+                    linear-gradient(135deg, transparent 50%, var(--bg-color) 50%),
+                    linear-gradient(75deg, var(--border-color) 30%, transparent 30%),
+                    linear-gradient(45deg, transparent 50%, var(--border-color) 50%);
+
+                clip-path: polygon(12.5% 0%, 32.5% 100%, 67.5% 100%, 87.5% 0%, 50% 45%);
+
+                --mask-img: radial-gradient(10px 10px ellipse at left 84% top 8%, black 99.5%, transparent 100%),
+                    radial-gradient(10px 10px ellipse at left 16% top 8%, black 99.5%, transparent 100%),
+                    linear-gradient(to bottom, transparent 22px, black 22px);
+
+                mask-image: var(--mask-img);
+                -webkit-mask-image: var(--mask-img);
+            }
+
+            #heixiu::before {
+                content: '';
+                position: absolute;
+                display: block;
+                z-index: 10;
+                width: 120%;
+                height: 100%;
+                top: 0;
+                left: -10%;
+
+                background-repeat: no-repeat;
+                background-image:
+                /* 左眼 */ radial-gradient(
+                        45px 65px ellipse at left 28% top 52%,
+                        var(--eye-color) 99.5%,
+                        transparent 100%
+                    ),
+                    radial-gradient(
+                        60px 80px ellipse at left 28% top 52%,
+                        var(--eye-border-color) 99.5%,
+                        transparent 100%
+                    ),
+                    radial-gradient(95px 125px ellipse at left 28% top 52%, white 99.5%, transparent 100%),
+                    radial-gradient(
+                        110px 140px ellipse at left 28% top 52%,
+                        var(--border-color) 99.5%,
+                        transparent 100%
+                    ),
+                    /* 右眼 */
+                        radial-gradient(
+                            45px 65px ellipse at right 28% top 52%,
+                            var(--eye-color) 99.5%,
+                            transparent 100%
+                        ),
+                    radial-gradient(
+                        60px 80px ellipse at right 28% top 52%,
+                        var(--eye-border-color) 99.5%,
+                        transparent 100%
+                    ),
+                    radial-gradient(95px 125px ellipse at right 28% top 52%, white 99.5%, transparent 100%),
+                    radial-gradient(
+                        110px 140px ellipse at right 28% top 52%,
+                        var(--border-color) 99.5%,
+                        transparent 100%
+                    ),
+                    /* 嘴 */
+                        radial-gradient(
+                            10px 8px ellipse at left 50% top 90%,
+                            rgba(78, 162, 174, 0.1) 99.5%,
+                            transparent 100%
+                        );
+            }
+        </style>
+    </head>
+    <body>
+        <div id="heixiu"></div>
+    </body>
+</html>
